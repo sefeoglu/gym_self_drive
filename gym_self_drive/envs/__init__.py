@@ -1,2 +1,2 @@
-from gym_self_drive.envs.selfdrive_car import SelfDrive
+from gym_self_drive.envs.self_drive import SelfDriveEnv
 

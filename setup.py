@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name='SelfDrive',
+setup(name='gym_self_drive',
       version='0.0.1',
       install_requires=['gym'] 
 )
