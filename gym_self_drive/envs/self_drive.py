@@ -8,11 +8,11 @@ import gym
 from gym import spaces
 from gym.envs.box2d.car_dynamics import Car
 from gym.utils import colorize, seeding, EzPickle
-
+from gym.envs.box2d.car_racing import FrictionDetector
 import pyglet
 from pyglet import gl
-
-
+from gym_self_drive.spaces.box_extended import BoxExtended
+import pprint
 
 STATE_W = 96   # less than Atari 160x192
 STATE_H = 96
@@ -20,7 +20,7 @@ VIDEO_W = 600
 VIDEO_H = 400
 WINDOW_W = 1000
 WINDOW_H = 800
-
+MAX_WAY = 1000.0
 SCALE       = 6.0        # Track scale
 TRACK_RAD   = 900/SCALE  # Track is heavily morphed circle with this radius
 PLAYFIELD   = 2000/SCALE # Game over boundary
@@ -36,44 +36,6 @@ BORDER = 8/SCALE
 BORDER_MIN_COUNT = 4
 
 ROAD_COLOR = [0.4, 0.4, 0.4]
-
-class FrictionDetector(contactListener):
-    def __init__(self, env):
-        contactListener.__init__(self)
-        self.env = env
-    def BeginContact(self, contact):
-        self._contact(contact, True)
-    def EndContact(self, contact):
-        self._contact(contact, False)
-    def _contact(self, contact, begin):
-        tile = None
-        obj = None
-        u1 = contact.fixtureA.body.userData
-        u2 = contact.fixtureB.body.userData
-        if u1 and "road_friction" in u1.__dict__:
-            tile = u1
-            obj  = u2
-        if u2 and "road_friction" in u2.__dict__:
-            tile = u2
-            obj  = u1
-        if not tile:
-            return
-
-        tile.color[0] = ROAD_COLOR[0]
-        tile.color[1] = ROAD_COLOR[1]
-        tile.color[2] = ROAD_COLOR[2]
-        if not obj or "tiles" not in obj.__dict__:
-            return
-        if begin:
-            obj.tiles.add(tile)
-            # print tile.road_friction, "ADD", len(obj.tiles)
-            if not tile.road_visited:
-                tile.road_visited = True
-                self.env.reward += 1500.0/len(self.env.track)
-                self.env.tile_visited_count += 1
-        else:
-            obj.tiles.remove(tile)
-            # print tile.road_friction, "DEL", len(obj.tiles) -- should delete to zero when on grass (this works)
 
 class SelfDriveEnv(gym.Env, EzPickle):
     metadata = {
@@ -98,7 +60,7 @@ class SelfDriveEnv(gym.Env, EzPickle):
                 shape = polygonShape(vertices=
                     [(0, 0),(1, 0),(1, -1),(0, -1)]))
 
-        self.action_space = spaces.Box( np.array([-1,0,0]), np.array([+1,+1,+1]), dtype=np.float32)  # steer, gas, brake
+        self.action_space = spaces.Box(np.array([-1,0,0]), np.array([+1,+1,+1]), dtype=np.float32)  # steer, gas, brake
         self.observation_space = spaces.Box(low=0, high=255, shape=(STATE_H, STATE_W, 3), dtype=np.uint8)
 
     def seed(self, seed=None):
@@ -268,7 +230,6 @@ class SelfDriveEnv(gym.Env, EzPickle):
         return True
 
     def reset(self):
-        print("Sefika")
         self._destroy()
         self.reward = 0.0
         self.prev_reward = 0.0
@@ -287,6 +248,8 @@ class SelfDriveEnv(gym.Env, EzPickle):
         return self.step(None)[0]
 
     def step(self, action):
+        pp = pprint.PrettyPrinter(width=41, compact=True)
+        pp.pprint(action)
         if action is not None:
             self.car.steer(-action[0])
             self.car.gas(action[1])
@@ -443,16 +406,16 @@ class SelfDriveEnv(gym.Env, EzPickle):
         gl.glEnd()
         self.score_label.text = "%04i" % self.reward
         self.score_label.draw()
-if __name__ == "__main__":
-    env = gym.make('gym_self_drive:drive-v0')
-    for i_episode in range(2):
-        observation = env.reset()
-        for t in range(10000):
-            env.render()
-            #print(observation)
-            action = env.action_space.sample()
-            observation, reward, done, info = env.step(action)
-            if done:
-                print("Episode finished after {} timesteps".format(t+1))
-                break
-    env.close()
+# if __name__ == "__main__":
+#     env = gym.make('gym_self_drive:drive-v0')
+#     for i_episode in range(2):
+#         observation = env.reset()
+#         for t in range(1000):
+#             env.render()
+#             #print(observation)
+#             action = env.action_space.sample()
+#             observation, reward, done, info = env.step(action)
+#             if done:
+#                 print("Episode finished after {} timesteps".format(t+1))
+#                 break
+#     env.close()
