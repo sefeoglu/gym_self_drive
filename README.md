@@ -14,6 +14,8 @@
 # Neural Network Model
 
 * Explain neural network model
+* Variational AutoEncoder Explain
+[VAE](https://blog.keras.io/building-autoencoders-in-keras.html)
 
 # DQN Agent
 
