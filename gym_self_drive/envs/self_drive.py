@@ -13,6 +13,7 @@ import pyglet
 from pyglet import gl
 from gym_self_drive.spaces.box_extended import BoxExtended
 import pprint
+import matplotlib.pyplot as plt
 
 STATE_W = 96   # less than Atari 160x192
 STATE_H = 96
@@ -342,10 +343,12 @@ class SelfDriveEnv(gym.Env, EzPickle):
             return self.viewer.isopen
 
         image_data = pyglet.image.get_buffer_manager().get_color_buffer().get_image_data()
+
         arr = np.fromstring(image_data.get_data(), dtype=np.uint8, sep='')
         arr = arr.reshape(VP_H, VP_W, 4)
         arr = arr[::-1, :, 0:3]
-
+        print(arr)
+        plt.imsave('name.png', arr)
         return arr
 
     def close(self):
@@ -406,16 +409,16 @@ class SelfDriveEnv(gym.Env, EzPickle):
         gl.glEnd()
         self.score_label.text = "%04i" % self.reward
         self.score_label.draw()
-# if __name__ == "__main__":
-#     env = gym.make('gym_self_drive:drive-v0')
-#     for i_episode in range(2):
-#         observation = env.reset()
-#         for t in range(1000):
-#             env.render()
-#             #print(observation)
-#             action = env.action_space.sample()
-#             observation, reward, done, info = env.step(action)
-#             if done:
-#                 print("Episode finished after {} timesteps".format(t+1))
-#                 break
-#     env.close()
+if __name__ == "__main__":
+    env = gym.make('gym_self_drive:drive-v0')
+    for i_episode in range(2):
+        observation = env.reset()
+        for t in range(1000):
+            env.render()
+            
+            action = env.action_space.sample()
+            observation, reward, done, info = env.step(action)
+            if done:
+                print("Episode finished after {} timesteps".format(t+1))
+                break
+    env.close()

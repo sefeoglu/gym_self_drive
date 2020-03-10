@@ -5,6 +5,9 @@ Sefika Efeoglu  sefeoglu@gmail.com
 
 from gym import spaces
 import numpy as np
+from pgmpy.factors.discrete import DiscreteFactor
+from pgmpy.sampling import GibbsSampling
+from pgmpy.models import MarkovModel
 
 
 class BoxExtended(spaces.Box):
@@ -40,4 +43,12 @@ class BoxExtended(spaces.Box):
       Random Sampling
       '''
       pass
-     
+if __name__ == "__main__":
+  model = MarkovModel([('A', 'B'), ('C', 'B')])
+  factor_ab = DiscreteFactor(['A', 'B'], [2, 2], [1, 2, 3, 4])
+  factor_cb = DiscreteFactor(['C', 'B'], [2, 2], [5, 6, 7, 8])
+  model.add_factors(factor_ab, factor_cb)
+  gibbs = GibbsSampling(model)
+  gen = gibbs.generate_sample(size=2)
+  for sample in gen:
+    print(sample)
