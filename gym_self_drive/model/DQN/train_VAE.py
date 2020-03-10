@@ -3,7 +3,7 @@ import numpy as np
 import glob, random, os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-model_path = "./gym_self_drive/models_CNN/saved_models/"
+model_path = "./gym_self_drive/model/saved_models/"
 model_name = model_path + 'model'
 
 class Network(object):
@@ -55,7 +55,7 @@ class Network(object):
 		return vae_loss
 
 def data_iterator(batch_size):
-	data_files = glob.glob('./gym_self_drive/models/data/obs_data_VAE_*')
+	data_files = glob.glob('./gym_self_drive/model/data/obs_data_VAE_*')
 	while True:
 		data = np.load(random.sample(data_files, 1)[0])
 		np.random.shuffle(data)
