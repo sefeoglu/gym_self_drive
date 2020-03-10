@@ -68,7 +68,10 @@ def play(params, render=True, verbose=False):
 		while True:
 			if render:
 				env.render()
+            ##TODO##
+            #change this place with DQN
 			action = decide_action(sess, network, observation, params)
+            #end change
 			observation, r, done, info = env.step(action)
 			total_reward += r
 			# NB: done is not True after 1000 steps when using the hack above for
