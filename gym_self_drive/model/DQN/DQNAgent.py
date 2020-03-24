@@ -1,7 +1,8 @@
-"""
+'''
 Game is solved when agent consistently gets 900+ points. Track is random every episode.
-"""
-
+Sefika Efeoglu 
+DQN Agent Training
+'''
 import numpy as np
 import gym
 import time, tqdm
@@ -52,8 +53,6 @@ class DQNAgent(object):
             action[1] = 0
 
         return action
-
-
 
     def play(self, params, render=True, verbose=False):
         ### TODO ###
