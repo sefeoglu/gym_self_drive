@@ -5,7 +5,7 @@ import cv2
 from gym.envs.box2d.car_dynamics import Car
 from gym.envs.box2d import CarRacing
 
-_BATCH_SIZE = 1
+_BATCH_SIZE = 10
 _NUM_BATCHES = 1
 _TIME_STEPS = 150
 _RENDER = True
@@ -53,7 +53,7 @@ def simulate_batch(batch_num):
             action = generate_action(action)
 
             observation, reward, done, info = env.step(action)
-            #cv2.imwrite("./gym_self_drive/models_CNN/data/obs_data_VAE_"+str(_)+".png",observation)
+            #cv2.imwrite("./gym_self_drive/model/data/obs_data_VAE_"+str(_)+".png",observation)
             observation = normalize_observation(observation)
             obs_data.append(observation)
 
@@ -65,7 +65,7 @@ def main():
     print("Generating data for env CarRacing-v0")
 
     with mp.Pool(mp.cpu_count()) as p:
-        p.map(simulate_batch, range(_NUM_BATCHES))
+        p.map(simulate_batch, range(1))
 
 if __name__ == "__main__":
     main()
