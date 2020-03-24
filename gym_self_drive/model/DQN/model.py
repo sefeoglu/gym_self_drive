@@ -15,31 +15,32 @@ class VariationalAutoencoderConfigBase(object):
         return mu + tf.exp(logvar / 2) * eps
 
     def compute_loss(self, reconstructions, resized_image, z_mu, z_logvar):
-        logits_flat = tf.layers.flatten(reconstructions)
-        labels_flat = tf.layers.flatten(resized_image)
+        
+        logits_flat = tf.keras.layers.Flatten()(reconstructions)
+        labels_flat = tf.keras.layers.Flatten()(resized_image)
         reconstruction_loss = tf.reduce_sum(tf.square(logits_flat - labels_flat), axis = 1)
         kl_loss = 0.5 * tf.reduce_sum(tf.exp(z_logvar) + z_mu**2 - 1. - z_logvar, 1)
         vae_loss = tf.reduce_mean(reconstruction_loss + kl_loss)
         return vae_loss
 
     def encoder(self, x, filter_list):
-        x = tf.layers.conv2d(x, filters=filter_list[0], kernel_size=4, strides=2, padding='valid', activation=tf.nn.relu)
-        x = tf.layers.conv2d(x, filters=filter_list[1], kernel_size=4, strides=2, padding='valid', activation=tf.nn.relu)
-        x = tf.layers.conv2d(x, filters=filter_list[2], kernel_size=4, strides=2, padding='valid', activation=tf.nn.relu)
-        x = tf.layers.conv2d(x, filters=filter_list[3], kernel_size=4, strides=2, padding='valid', activation=tf.nn.relu)
+        x = tf.keras.layers.Conv2D(filters=filter_list[0], kernel_size=4, strides=2, padding='valid', activation=tf.nn.relu)(x)
+        x = tf.keras.layers.Conv2D(filters=filter_list[1], kernel_size=4, strides=2, padding='valid', activation=tf.nn.relu)(x)
+        x = tf.keras.layers.Conv2D(filters=filter_list[2], kernel_size=4, strides=2, padding='valid', activation=tf.nn.relu)(x)
+        x = tf.keras.layers.Conv2D(filters=filter_list[3], kernel_size=4, strides=2, padding='valid', activation=tf.nn.relu)(x)
 
-        x = tf.layers.flatten(x)
-        z_mu = tf.layers.dense(x, units=32, name='z_mu')
-        z_logvar = tf.layers.dense(x, units=32, name='z_logvar')
+        x = tf.keras.layers.Flatten()(x)
+        z_mu = tf.keras.layers.Dense(units=32, name='z_mu')(x)
+        z_logvar = tf.keras.layers.Dense( units=32, name='z_logvar')(x)
         return z_mu, z_logvar
 
     def decoder(self, z, filter_list):
-        x = tf.layers.dense(z, 1024, activation=None)
+        x = tf.keras.layers.Dense(1024, activation=None)(z)
         x = tf.reshape(x, [-1, 1, 1, 1024])
-        x = tf.layers.conv2d_transpose(x, filters=filter_list[0], kernel_size=5, strides=2, padding='valid', activation=tf.nn.relu)
-        x = tf.layers.conv2d_transpose(x, filters=filter_list[1], kernel_size=5, strides=2, padding='valid', activation=tf.nn.relu)
-        x = tf.layers.conv2d_transpose(x, filters=filter_list[2], kernel_size=6, strides=2, padding='valid', activation=tf.nn.relu)
-        x = tf.layers.conv2d_transpose(x, filters=filter_list[3], kernel_size=6, strides=2, padding='valid', activation=tf.nn.sigmoid)
+        x = tf.keras.layers.Conv2DTranspose(filters=filter_list[0], kernel_size=5, strides=2, padding='valid', activation=tf.nn.relu)(x)
+        x = tf.keras.layers.Conv2DTranspose(filters=filter_list[1], kernel_size=5, strides=2, padding='valid', activation=tf.nn.relu)(x)
+        x = tf.keras.layers.Conv2DTranspose(filters=filter_list[2], kernel_size=6, strides=2, padding='valid', activation=tf.nn.relu)(x)
+        x = tf.keras.layers.Conv2DTranspose(filters=filter_list[3], kernel_size=6, strides=2, padding='valid', activation=tf.nn.sigmoid)(x)
         return x
 
 class VariationalAutoencoderConfig1(VariationalAutoencoderConfigBase):
