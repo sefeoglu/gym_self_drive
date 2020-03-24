@@ -17,13 +17,11 @@ _EMBEDDING_SIZE = 32
 _NUM_PREDICTIONS = 2
 _NUM_ACTIONS = 3
 _NUM_PARAMS = _NUM_PREDICTIONS * _EMBEDDING_SIZE + _NUM_PREDICTIONS
-env = CarRacing()
+
 
 class DQNAgent(object):
-
-    def __init__(self):
-        pass
-        
+    ''' Train the agent with VAE and QN'''
+    
     def normalize_observation(self, observation):
         return observation.astype('float32') / 255.
 
@@ -36,9 +34,9 @@ class DQNAgent(object):
     def decide_action(self, sess, network, observation, params):
         ### TODO ###
         #Convert here to deep Q network
-        observation = normalize_observation(observation)
+        observation = self.normalize_observation(observation)
         embedding = sess.run(network.z, feed_dict={network.image: observation[None, :,  :,  :]})
-        weights, bias = get_weights_bias(params)
+        weights, bias = self.get_weights_bias(params)
 
         action = np.zeros(_NUM_ACTIONS)
         prediction = np.matmul(np.squeeze(embedding), weights) + bias
@@ -63,22 +61,22 @@ class DQNAgent(object):
         _NUM_TRIALS = 1
         agent_reward = 0
         for trial in range(_NUM_TRIALS):
-            observation = env.reset()
+            observation = self.env.reset()
             # Little hack to make the Car start at random positions in the race-track
             np.random.seed(int(str(time.time()*1000000)[10:13]))
-            position = np.random.randint(len(env.track))
-            env.car = Car(env.world, *env.track[position][1:4])
+            position = np.random.randint(len(self.env.track))
+            self.env.car = Car(self.env.world, *self.env.track[position][1:4])
 
             total_reward = 0.0
             steps = 0
             while True:
                 if render:
-                    env.render()
+                    self.env.render()
                 ##TODO##
                 #change this place with DQN
-                action = decide_action(sess, network, observation, params)
+                action = self.decide_action(sess, network, observation, params)
                 #end change
-                observation, r, done, info = env.step(action)
+                observation, r, done, info = self.env.step(action)
                 total_reward += r
                 # NB: done is not True after 1000 steps when using the hack above for
                 # 	  random init of position
@@ -104,7 +102,7 @@ class DQNAgent(object):
             while not es.stop():
                 solutions = es.ask()
                 with mp.Pool(mp.cpu_count()) as p:
-                    rewards = list(tqdm.tqdm(p.imap(play, list(solutions)), total=len(solutions)))
+                    rewards = list(tqdm.tqdm(p.imap(self.play, list(solutions)), total=len(solutions)))
 
                 es.tell(solutions, rewards)
 
@@ -115,7 +113,7 @@ class DQNAgent(object):
                 print("Avg reward: {:.3f}".format(np.mean(rewards)))
                 print("**************\n")
 
-                generation+=1
+                generation += 1
                 rewards_through_gens.append(rewards)
                 np.save('rewards', rewards_through_gens)
 
