@@ -10,7 +10,7 @@ from gym.envs.box2d import CarRacing
 
 import cma
 import multiprocessing as mp
-
+from model import *
 from train_VAE import TrainModel
 
 _EMBEDDING_SIZE = 32
@@ -62,7 +62,7 @@ class DQNAgent(object):
         NETWOK = VariationalAutoencoderConfig2()
         train = TrainModel(NETWOK)
         sess, network = train.load_vae()
-        _NUM_TRIALS = 1
+        _NUM_TRIALS = 400
         agent_reward = 0
         for trial in range(_NUM_TRIALS):
             observation = self.env.reset()

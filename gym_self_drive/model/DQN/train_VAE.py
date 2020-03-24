@@ -1,10 +1,8 @@
 import tensorflow as tf
 import numpy as np
 import glob, random, os
-from model import VariationalAutoencoderConfig1
-from model import VariationalAutoencoderConfig2
-from model import VariationalAutoencoderConfig3
-from model import VariationalAutoencoderConfig4
+from model import *
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 MODEL_PATH = "./gym_self_drive/model/saved_models/"
