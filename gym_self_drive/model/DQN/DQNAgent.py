@@ -11,7 +11,7 @@ from gym.envs.box2d import CarRacing
 import cma
 import multiprocessing as mp
 
-from train_VAE import load_vae
+from train_VAE import TrainModel
 
 _EMBEDDING_SIZE = 32
 _NUM_PREDICTIONS = 2
@@ -58,7 +58,10 @@ class DQNAgent(object):
     def play(self, params, render=True, verbose=False):
         ### TODO ###
         #Convert here to Deep Q Network
-        sess, network = load_vae()
+        ##Create network config
+        NETWOK = VariationalAutoencoderConfig2()
+        train = TrainModel(NETWOK)
+        sess, network = train.load_vae()
         _NUM_TRIALS = 1
         agent_reward = 0
         for trial in range(_NUM_TRIALS):
