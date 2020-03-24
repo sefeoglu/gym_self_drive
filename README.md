@@ -17,9 +17,9 @@
 * Variational AutoEncoder Explain
 [VAE](https://blog.keras.io/building-autoencoders-in-keras.html)
 
-# DQN Agent
+#  Agent
 
-* Deep Q Learning section
+
 
 # Results
 
