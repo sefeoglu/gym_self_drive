@@ -14,7 +14,7 @@ class VariationalAutoencoderConfig(object):
         eps = tf.random_normal(shape=tf.shape(mu))
         return mu + tf.exp(logvar / 2) * eps
 
-    def compute_loss(self, reconstructions, resized_image,z_mu,z_logvar):
+    def compute_loss(self, reconstructions, resized_image, z_mu, z_logvar):
         logits_flat = tf.layers.flatten(reconstructions)
         labels_flat = tf.layers.flatten(resized_image)
         reconstruction_loss = tf.reduce_sum(tf.square(logits_flat - labels_flat), axis = 1)
