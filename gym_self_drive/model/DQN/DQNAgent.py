@@ -21,7 +21,8 @@ _NUM_PARAMS = _NUM_PREDICTIONS * _EMBEDDING_SIZE + _NUM_PREDICTIONS
 
 class DQNAgent(object):
     ''' Train the agent with VAE and QN'''
-    
+    def __init__(self):
+        self.env = CarRacing()
     def normalize_observation(self, observation):
         return observation.astype('float32') / 255.
 
