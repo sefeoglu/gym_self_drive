@@ -2,9 +2,9 @@ import tensorflow as tf
 import numpy as np
 import glob, random, os
 from model import VariationalAutoencoderConfig1
-from model import VariationalAutoencoderConfing2
-from model import VariationalAutoencoderConfing3
-from model import VariationalAutoencoderConfing4
+from model import VariationalAutoencoderConfig2
+from model import VariationalAutoencoderConfig3
+from model import VariationalAutoencoderConfig4
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 MODEL_PATH = "./gym_self_drive/model/saved_models/"
@@ -95,7 +95,7 @@ class TrainModel(object):
 
 if __name__ == "__main__":
     # add model selection step here
-    NETWOK = VariationalAutoencoderConfig1()
-    train = TrainModel(netNETWOKwork)
+    NETWOK = VariationalAutoencoderConfig2()
+    train = TrainModel(NETWOK)
     train.train_vae()
     
