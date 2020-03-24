@@ -1,5 +1,6 @@
 # gym self drive
-* The project uses the CarRacing environment of OpenAI after it is modified.
+* The project uses the CarRacing environment of OpenAI
+
 
 
 
@@ -13,16 +14,23 @@
 
 # Neural Network Model
 
-* Explain neural network model
 * Variational AutoEncoder Explain
 [VAE](https://blog.keras.io/building-autoencoders-in-keras.html)
 
-#  Agent
+* First Configuration of VAE
+* Second Configuration of VAE
+* Third Configuration of VAE
+* Forth Configuration of VAE
 
+
+#  Agent
+ * Explain reward mechanism
+ * Explain observation and optimum action
+ * Explain best params
 
 
 # Results
 
-Evaluate the results.
+Evaluate configurations of VAE models
 
 
