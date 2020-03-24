@@ -24,16 +24,16 @@ class DQNAgent(object):
     def __init__(self):
         pass
         
-    def normalize_observation(observation):
+    def normalize_observation(self, observation):
         return observation.astype('float32') / 255.
 
-    def get_weights_bias(params):
+    def get_weights_bias(self, params):
         weights = params[:_NUM_PARAMS - _NUM_PREDICTIONS]
         bias = params[-_NUM_PREDICTIONS:]
         weights = np.reshape(weights, [_EMBEDDING_SIZE, _NUM_PREDICTIONS])
         return weights, bias
 
-    def decide_action(sess, network, observation, params):
+    def decide_action(self, sess, network, observation, params):
         ### TODO ###
         #Convert here to deep Q network
         observation = normalize_observation(observation)
@@ -56,7 +56,7 @@ class DQNAgent(object):
 
 
 
-    def play(params, render=True, verbose=False):
+    def play(self, params, render=True, verbose=False):
         ### TODO ###
         #Convert here to Deep Q Network
         sess, network = load_vae()
@@ -96,7 +96,7 @@ class DQNAgent(object):
 
         return - (agent_reward / _NUM_TRIALS)
 
-    def train():
+    def train(self):
         es = cma.CMAEvolutionStrategy(_NUM_PARAMS * [0], 0.1, {'popsize': 16})
         rewards_through_gens = []
         generation = 1
@@ -131,5 +131,5 @@ if __name__ == '__main__':
     np.save('best_params', es.best.get()[0])
     input("Press enter to play... ")
     RENDER = True
-    score = play(es.best.get()[0], render=RENDER, verbose=True)
+    score = dqnagent.play(es.best.get()[0], render=RENDER, verbose=True)
     print("Final Score: {}".format(-score))
