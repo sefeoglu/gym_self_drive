@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import glob, random, os
-from model import *
+from model import VariationalAutoencoderConfigBase
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -12,8 +12,7 @@ class TrainModel(object):
     ''' Train the your own model'''
     def __init__(self, model):
         self.network = model
-        pass
-
+        
     def data_iterator(self, batch_size):
         data_files = glob.glob('./gym_self_drive/model/data/obs_data_VAE_*')
         while True:
@@ -93,7 +92,7 @@ class TrainModel(object):
 
 if __name__ == "__main__":
     # add model selection step here
-    NETWOK = VariationalAutoencoderConfig2()
+    NETWOK = VariationalAutoencoderConfigBase()
     train = TrainModel(NETWOK)
     train.train_vae()
     

@@ -76,7 +76,7 @@ class DQNAgent(object):
                 if render:
                     self.env.render()
                 ##TODO##
-                #change this place with DQN
+                
                 action = self.decide_action(sess, network, observation, params)
                 #end change
                 observation, r, done, info = self.env.step(action)
