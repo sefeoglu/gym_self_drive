@@ -37,4 +37,4 @@ Evaluate configurations of VAE models
 [CarRacing-V0 Data](https://drive.google.com/drive/folders/1mZk_yBLN-Iak_E8ewBJSl0rz1W1ckszM?usp=sharing)
 
 # Saved Models :
-[VAE Models] (https://drive.google.com/drive/folders/1mZk_yBLN-Iak_E8ewBJSl0rz1W1ckszM?usp=sharing)
+[VAE Models](https://drive.google.com/drive/folders/1mZk_yBLN-Iak_E8ewBJSl0rz1W1ckszM?usp=sharing)
