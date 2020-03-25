@@ -5,8 +5,8 @@ import cv2
 from gym.envs.box2d.car_dynamics import Car
 from gym.envs.box2d import CarRacing
 
-_BATCH_SIZE = 10
-_NUM_BATCHES = 1
+_BATCH_SIZE = 16
+_NUM_BATCHES = 16
 _TIME_STEPS = 150
 _RENDER = True
 
@@ -65,7 +65,7 @@ def main():
     print("Generating data for env CarRacing-v0")
 
     with mp.Pool(mp.cpu_count()) as p:
-        p.map(simulate_batch, range(1))
+        p.map(simulate_batch, range(4))
 
 if __name__ == "__main__":
     main()

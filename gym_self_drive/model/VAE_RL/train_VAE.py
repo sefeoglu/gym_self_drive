@@ -5,7 +5,7 @@ from model import VariationalAutoencoderConfigBase
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-MODEL_PATH = "./gym_self_drive/model/saved_models/"
+MODEL_PATH = "./gym_self_drive/model/saved_models/2/"
 MODEL_NAME = MODEL_PATH + 'model'
 
 class TrainModel(object):
@@ -56,7 +56,7 @@ class TrainModel(object):
                 if step % 10 == 0 and step > 0:
                     print ('step {}: training loss {:.6f}'.format(step, loss_value))
                     save_path = saver.save(sess, MODEL_NAME, global_step=global_step)
-                if loss_value <= 35:
+                if loss_value <= 45:
                     print ('step {}: training loss {:.6f}'.format(step, loss_value))
                     save_path = saver.save(sess, MODEL_NAME, global_step=global_step)
                     break
@@ -69,30 +69,29 @@ class TrainModel(object):
             print("Exception: {}".format(e))
 
 
-    def load_vae(self):
+def load_vae():
+    
+    graph = tf.Graph()
+    with graph.as_default():
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
+        sess = tf.Session(config=config, graph=graph)
 
-        graph = tf.Graph()
-        with graph.as_default():
-            config = tf.ConfigProto()
-            config.gpu_options.allow_growth = True
-            sess = tf.Session(config=config, graph=graph)
+        network = VariationalAutoencoderConfigBase(2)
+        init = tf.global_variables_initializer()
+        sess.run(init)
 
-            init = tf.global_variables_initializer()
-            sess.run(init)
+        saver = tf.train.Saver(max_to_keep=1)
+        
+        
+        try:
+            saver.restore(sess, tf.train.latest_checkpoint(MODEL_PATH))
+        except:
+            raise ImportError("Could not restore saved model")
 
-            saver = tf.train.Saver(max_to_keep=1)
-            training_data = self.data_iterator(batch_size=128)
-
-            try:
-                saver.restore(sess, tf.train.latest_checkpoint(MODEL_PATH))
-            except:
-                raise ImportError("Could not restore saved model")
-
-            return sess, self.network
-
+        return sess, network
 if __name__ == "__main__":
     # add model selection step here
-    NETWOK = VariationalAutoencoderConfigBase()
+    NETWOK = VariationalAutoencoderConfigBase(2)
     train = TrainModel(NETWOK)
     train.train_vae()
-    
