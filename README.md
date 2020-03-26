@@ -31,8 +31,15 @@
 
 # Results
 
-Evaluate configurations of VAE models
-
+Evaluate configurations of VAE model
+```
+**************
+Generation: 1
+Min reward: -56.402
+Max reward: 3.821
+Avg reward: -33.398
+**************
+```
 # Data 
 [CarRacing-V0 Data](https://drive.google.com/drive/folders/1mZk_yBLN-Iak_E8ewBJSl0rz1W1ckszM?usp=sharing)
 
