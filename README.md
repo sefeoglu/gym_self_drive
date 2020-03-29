@@ -18,6 +18,8 @@
 [VAE](https://blog.keras.io/building-autoencoders-in-keras.html)
 
 * First Configuration of VAE
+  ![alt text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/Config1.png)
+
 * Second Configuration of VAE
 * Third Configuration of VAE
 * Forth Configuration of VAE
