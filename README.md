@@ -22,6 +22,8 @@
 
 * Second Configuration of VAE
 * Third Configuration of VAE
+   ![alt text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/Config2.png)
+
 * Forth Configuration of VAE
 
 
