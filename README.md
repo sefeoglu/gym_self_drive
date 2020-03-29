@@ -32,14 +32,14 @@
 # Results
 
 Evaluate configurations of VAE model
-```
-**************
-Generation: 1
-Min reward: -56.402
-Max reward: 3.821
-Avg reward: -33.398
-**************
-```
+* Rewards Graph of Config 1
+
+![alt text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/rewards_1.png)
+
+* Rewards Graph of Config 3
+
+![alt_text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/rewards3.png)
+
 # Data 
 [CarRacing-V0 Data](https://drive.google.com/drive/folders/1mZk_yBLN-Iak_E8ewBJSl0rz1W1ckszM?usp=sharing)
 
