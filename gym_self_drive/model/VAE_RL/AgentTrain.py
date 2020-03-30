@@ -85,7 +85,7 @@ def play(params, render=True, verbose=False):
 	return - (agent_reward / _NUM_TRIALS)
 
 def train():
-	es = cma.CMAEvolutionStrategy(_NUM_PARAMS * [0], 0.1, {'popsize': 16})
+	es = cma.CMAEvolutionStrategy(_NUM_PARAMS * [0], 0.1, {'popsize': 4})
 	rewards_through_gens = []
 	generation = 1
 	try:
@@ -95,7 +95,7 @@ def train():
 				rewards = list(tqdm.tqdm(p.imap(play, list(solutions)), total=len(solutions)))
 
 			es.tell(solutions, rewards)
-
+			np.save('best_params4_2_cumm', es.best.get()[0])
 			rewards = np.array(rewards) *(-1.)
 			print("\n**************")
 			print("Generation: {}".format(generation))
@@ -105,7 +105,7 @@ def train():
 
 			generation+=1
 			rewards_through_gens.append(rewards)
-			np.save('rewards', rewards_through_gens)
+			np.save('rewards4-2', rewards_through_gens)
 
 	except (KeyboardInterrupt, SystemExit):
 		print("Manual Interrupt")
@@ -115,7 +115,7 @@ def train():
 
 if __name__ == '__main__':
 	es = train()
-	np.save('best_params', es.best.get()[0])
+	np.save('best_params4_2', es.best.get()[0])
 	input("Press enter to play... ")
 	RENDER = True
 	score = play(es.best.get()[0], render=RENDER, verbose=True)

@@ -5,7 +5,7 @@ from model import VariationalAutoencoderConfigBase
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-MODEL_PATH = "./gym_self_drive/model/saved_models/2/"
+MODEL_PATH = "./gym_self_drive/model/saved_models/1/"
 MODEL_NAME = MODEL_PATH + 'model'
 
 class TrainModel(object):
@@ -56,7 +56,7 @@ class TrainModel(object):
                 if step % 10 == 0 and step > 0:
                     print ('step {}: training loss {:.6f}'.format(step, loss_value))
                     save_path = saver.save(sess, MODEL_NAME, global_step=global_step)
-                if loss_value <= 45:
+                if loss_value <= 28:
                     print ('step {}: training loss {:.6f}'.format(step, loss_value))
                     save_path = saver.save(sess, MODEL_NAME, global_step=global_step)
                     break
@@ -77,7 +77,7 @@ def load_vae():
         config.gpu_options.allow_growth = True
         sess = tf.Session(config=config, graph=graph)
 
-        network = VariationalAutoencoderConfigBase(2)
+        network = VariationalAutoencoderConfigBase(1)
         init = tf.global_variables_initializer()
         sess.run(init)
 
@@ -92,6 +92,6 @@ def load_vae():
         return sess, network
 if __name__ == "__main__":
     # add model selection step here
-    NETWOK = VariationalAutoencoderConfigBase(2)
+    NETWOK = VariationalAutoencoderConfigBase(1)
     train = TrainModel(NETWOK)
     train.train_vae()
