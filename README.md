@@ -44,6 +44,9 @@ Evaluate configurations of VAE model
 
 ![alt_text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/rewards3.png)
 
+* Video
+
+[![CarRacing-V0 ](https://gym.openai.com/videos/2019-10-21--mqt8Qj1mwo/CarRacing-v0/poster.jpg)](https://www.youtube.com/watch?v=76iVVovnxhw)
 # Data 
 [CarRacing-V0 Data](https://drive.google.com/drive/folders/1mZk_yBLN-Iak_E8ewBJSl0rz1W1ckszM?usp=sharing)
 
