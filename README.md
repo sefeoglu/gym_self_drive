@@ -1,5 +1,5 @@
 # gym self drive
-* The project uses the CarRacing environment of OpenAI. CarRacing finishes when car obtains 900+ rewards.Car dies if it has -100 rewards.
+The project uses the CarRacing environment of OpenAI. CarRacing finishes when car obtains 900+ rewards.Car dies if it has -100 rewards.
 In this Project Car has accessed to just 520 Rewards so far because of the less training of the agent.
 
 # Summary
