@@ -2,12 +2,12 @@
 * The project uses the CarRacing environment of OpenAI. CarRacing finishes when car obtains 900+ rewards.Car dies if it has -100 rewards.
 In this Project Car has accessed to just 520 Rewards so far because of the less training of the agent.
 
-# Abstract
+# Summary
 
 Data is generated for 16 episodes and 150 steps for each episode. In addtion to this,Data is created while running 4 agents at the same time via multiprocessor(4). That is to say, It consists 9600 observations.
 VAE uses for classification of observation. Encoder compresses the observation and decoder reconstructs it.Then RL agent makes a decision via VAE which was already trained.
 
-Compulational loss is Kullblack Leibler divergence loss and log loss.
+Compulational loss is Kullback-Leibler divergence loss and log loss.
 
 As a result of the project, number of convolution filter affects the timing of high rewrads.This project is an another application of Monkey Car solution in [1].
 
