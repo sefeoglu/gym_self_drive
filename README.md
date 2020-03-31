@@ -1,5 +1,5 @@
 # gym self drive
-* The project uses the CarRacing environment of OpenAI
+* The project uses the CarRacing environment of OpenAI.
 
 
 
@@ -13,21 +13,29 @@
 * Give motivation and Examples from literature
 
 # Neural Network Model
+```gym_self_drive/model/VAE_RL/model.py``` :
 
-* Variational AutoEncoder Explain
-[VAE](https://blog.keras.io/building-autoencoders-in-keras.html)
+
 
 * First Configuration of VAE
   ![alt text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/Config1.png)
 
-* Second Configuration of VAE
+* ``Second Configuration of VAE`` : Work in progress 
+
+    64 32 64 128 64  
 * Third Configuration of VAE
    ![alt text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/Config2.png)
 
-* Forth Configuration of VAE
+* ```Forth Configuration of VAE```: Work in progress
+
+     64 128 256 512
+# Train VAE
+```gym_self_drive/model/VAE_RL/train_VAE.py``` :
 
 
-#  Agent
+#  Agent:
+```gym_self_drive/model/VAE_RL/AgentTrain.py``` :
+
  * Explain reward mechanism
  * Explain observation and optimum action
  * Explain best params
