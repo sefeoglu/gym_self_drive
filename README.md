@@ -82,7 +82,7 @@ Evaluate configurations of VAE model
 
 Reference
 ============
-[1] 
+[1] On the use of Deep Autoencoders for Efficient Embedded Reinforcement Learning
 ```
 
 @paper{VAE,
