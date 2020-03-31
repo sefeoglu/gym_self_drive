@@ -13,6 +13,8 @@
 * Give motivation and Examples from literature
 
 # Neural Network Model
+* Variational Auto Encoder
+
 ```gym_self_drive/model/VAE_RL/model.py``` :
 
 
