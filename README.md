@@ -1,19 +1,16 @@
 # gym self drive
 * The project uses the CarRacing environment of OpenAI.
 
-
-
-
 # Abstract
 
 *  Summarize the project and aims of it
 
-# Motivation
-
-* Give motivation and Examples from literature
 
 # Neural Network Model
-* Variational Auto Encoder
+
+* Variational Auto Encoder :
+
+LaserScanner of Car providers observation regarding the envirement and then it sends to VAE. RL Agent makes a decision from the observation. Agent gets -1,+1 Rewards from this action. 
 
 ![alt text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/VAEModel.png)
 
@@ -36,15 +33,17 @@
 
      64 128 256 512
 # Train VAE
-```gym_self_drive/model/VAE_RL/train_VAE.py``` :
+```gym_self_drive/model/VAE_RL/train_VAE.py``` : Train VAE with generated data from CarRacing-V0 environment.
 
 
 #  Agent:
-```gym_self_drive/model/VAE_RL/AgentTrain.py``` :
+```gym_self_drive/model/VAE_RL/AgentTrain.py``` : Train agent with VAE and RL. For VAE parameters, CMAEvolutionStrategy package is used. It provider parameter for VAE, so hyperparameter tuning is not needed for this project.
 
- * Explain reward mechanism
+ * Explain reward mechanism : The CarRacing finishes when Car obtains 9999 rewards according the setup of CarRacing-v0 Environment.
+ 
  * Explain observation and optimum action
- * Explain best params
+ 
+ * Explain best params refers to CMA parameter when Agent got high rewards while training it.
 
 
 # Results
