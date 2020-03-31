@@ -1,5 +1,6 @@
 # gym self drive
-* The project uses the CarRacing environment of OpenAI.
+* The project uses the CarRacing environment of OpenAI. CarRacing finishes when car obtains 900+ rewards.
+In this Project Car has accessed to just 520 Rewards so far because of the less training of the agent.
 
 # Abstract
 
@@ -25,13 +26,13 @@ LaserScanner of Car providers observation regarding the envirement and then it s
 
 * ``Second Configuration of VAE`` : Work in progress 
 
-    64 32 64 128 64  
+   Config:  64-32-64-128-64  
 * Third Configuration of VAE
    ![alt text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/Config2.png)
 
 * ```Forth Configuration of VAE```: Work in progress
 
-     64 128 256 512
+   Config:  64-128-256-512
 # Train VAE
 ```gym_self_drive/model/VAE_RL/train_VAE.py``` : Train VAE with generated data from CarRacing-V0 environment.
 
@@ -39,9 +40,9 @@ LaserScanner of Car providers observation regarding the envirement and then it s
 #  Agent:
 ```gym_self_drive/model/VAE_RL/AgentTrain.py``` : Train agent with VAE and RL. For VAE parameters, CMAEvolutionStrategy package is used. It provider parameter for VAE, so hyperparameter tuning is not needed for this project.
 
- * Explain reward mechanism : The CarRacing finishes when Car obtains 9999 rewards according the setup of CarRacing-v0 Environment.
+ * mechanism : The CarRacing finishes when Car obtains 900+ rewards according the setup of CarRacing-v0 Environment.
  
- * Explain observation and optimum action
+ * Action: Steer, Gas, Brake.
  
  * Explain best params refers to CMA parameter when Agent got high rewards while training it.
 
