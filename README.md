@@ -15,6 +15,10 @@
 # Neural Network Model
 * Variational Auto Encoder
 
+![alt text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/VAEModel.png)
+
+## Functionalities
+
 ```gym_self_drive/model/VAE_RL/model.py``` :
 
 
