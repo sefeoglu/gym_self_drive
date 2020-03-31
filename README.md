@@ -9,7 +9,7 @@ VAE uses for classification of observation. Encoder compresses the observation a
 
 Compulational loss uses Kullback-Leibler divergence loss and reconstruction loss.
 
-As a result of the project, number of convolution filter affects the timing of high rewrads.This project is an another application of Monkey Car solution in [1].
+As a result of the project, number of convolution filter affects the timing of high rewrads.This VAE benefits configs of Monkey Car solution in [1] and it uses VAE part of World Model solution.
 
 
 # Neural Network Model
