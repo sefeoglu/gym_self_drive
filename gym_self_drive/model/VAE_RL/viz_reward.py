@@ -31,5 +31,5 @@ def display_rewards(rewards):
 
 if __name__ == '__main__':
     while True:
-        rewards = list(np.load('../results/rewards4-2.npy'))
+        rewards = list(np.load('./results/rewards4-2.npy'))
         display_rewards(rewards)

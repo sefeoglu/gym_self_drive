@@ -95,7 +95,6 @@ def train():
 				rewards = list(tqdm.tqdm(p.imap(play, list(solutions)), total=len(solutions)))
 
 			es.tell(solutions, rewards)
-			np.save('../results/best_params4_2_cumm', es.best.get()[0])
 			rewards = np.array(rewards) *(-1.)
 			print("\n**************")
 			print("Generation: {}".format(generation))
@@ -114,9 +113,11 @@ def train():
 	return es
 
 if __name__ == '__main__':
-	es = train()
-	np.save('../results/best_params4_2', es.best.get()[0])
-	input("Press enter to play... ")
+	# es = train()
+	# np.save('../results/best_params4_5', es.best.get()[0])
+	# input("Press enter to play... ")
+	es = list(np.load('../results/best_params4_2_cumm.npy'))
 	RENDER = True
-	score = play(es.best.get()[0], render=RENDER, verbose=True)
+	score = play(es, render=RENDER, verbose=True)
+	#score = play(es.best.get()[0], render=RENDER, verbose=True)
 	print("Final Score: {}".format(-score))
