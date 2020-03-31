@@ -57,6 +57,10 @@ Evaluate configurations of VAE model
 
 ![alt_text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/rewards3.png)
 
+* Many Iteration with config 1
+
+![alt text](https://github.com/sefeoglu/gym_self_drive/blob/master/gym_self_drive/model/images/For4Agent_reward.png)
+
 * Video
 
 [![CarRacing-V0 ](https://gym.openai.com/videos/2019-10-21--mqt8Qj1mwo/CarRacing-v0/poster.jpg)](https://www.youtube.com/watch?v=76iVVovnxhw)
